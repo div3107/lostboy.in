@@ -1,0 +1,16 @@
+{
+  "name": "lostboy Terminal Portfolio",
+  "short_name": "lostboy",
+  "start_url": ".",
+  "display": "standalone",
+  "description": "Cybersecurity portfolio for lostboy in a responsive, animated Linux terminal UI.",
+  "background_color": "#0f111a",
+  "theme_color": "#0f111a",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

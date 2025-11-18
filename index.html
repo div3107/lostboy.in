@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lostboy.in — Cybersecurity Terminal Portfolio</title>
+    <meta
+      name="description"
+      content="lostboy — Offensive security specialist. Explore skills, projects, and certifications via a responsive Linux terminal interface."
+    />
+    <meta name="keywords" content="lostboy, cybersecurity, hacker, terminal portfolio, red team" />
+    <meta name="author" content="lostboy" />
+    <meta name="theme-color" content="#0f111a" />
+    <meta property="og:title" content="lostboy — Cybersecurity Terminal" />
+    <meta property="og:description" content="Walk through skills, projects, and contact info in a cyberpunk Linux terminal." />
+    <meta property="og:image" content="assets/og-card.svg" />
+    <meta property="og:url" content="https://lostboy.in" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="lostboy — Cybersecurity Terminal" />
+    <meta name="twitter:description" content="Lostboy's cybersecurity dossier rendered as an interactive Linux terminal." />
+    <meta name="twitter:image" content="assets/og-card.svg" />
+    <link rel="canonical" href="https://lostboy.in" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        const storedTheme = localStorage.getItem("lostboy-theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = storedTheme || (prefersDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" type="module" defer></script>
+  </head>
+  <body class="mode-terminal">
+    <noscript>
+      <div class="noscript-warning">
+        JavaScript is required for the interactive terminal experience. Please enable it to continue.
+      </div>
+    </noscript>
+
+    <main class="terminal-wrapper" role="main">
+      <header class="terminal-header">
+        <div class="brand">
+          <img src="assets/cursor.svg" alt="Terminal cursor" width="20" height="20" />
+          <div>
+            <span class="brand-handle">@lostboy</span>
+            <span class="brand-domain">lostboy.in</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <div class="status-indicator" role="status" aria-live="polite">
+            <span class="status-dot"></span>
+            <span>STATUS: ACTIVE</span>
+          </div>
+          <button class="mode-switch" id="mode-switch" type="button" aria-label="Switch to normal view">
+            <span class="mode-switch__label">Normal Mode</span>
+          </button>
+          <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <img src="assets/icon-sun.svg" alt="" class="theme-icon theme-icon--light" />
+            <img src="assets/icon-moon.svg" alt="" class="theme-icon theme-icon--dark" />
+          </button>
+        </div>
+      </header>
+
+      <section class="terminal-screen" aria-live="polite">
+        <div class="terminal-output" id="terminal-output"></div>
+        <div class="terminal-input">
+          <label class="sr-only" for="terminal-command">Terminal command input</label>
+          <span class="prompt">lostboy@ops:~$</span>
+          <input
+            id="terminal-command"
+            type="text"
+            name="terminal-command"
+            inputmode="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="none"
+            spellcheck="false"
+            aria-label="Type a command such as help, whoami, skills"
+          />
+        </div>
+        <div class="typed-cursor" id="terminal-cursor"></div>
+      </section>
+
+      <section class="terminal-sections">
+        <article class="terminal-section" id="section-whoami" aria-label="Who Am I">
+          <h2>// whoami</h2>
+          <p>
+            Hi, I’m <strong>Divyanshu Gupta</strong> — a cybersecurity enthusiast with hands-on experience in VAPT, web/API security testing, and
+            bug bounty hunting. I live for spotting vulnerabilities, dissecting flaws, and tightening defenses with practical tooling.
+          </p>
+          <p>Catch me at CTFs, cheering for Virat Kohli, or finishing a Clash of Clans raid between assessments.</p>
+          <ul class="whoami-links">
+            <li><span>Website</span><a href="https://lostboy.in" target="_blank" rel="noopener">lostboy.in</a></li>
+            <li><span>Email</span><a href="mailto:geek.divyanshu@gmail.com">geek.divyanshu@gmail.com</a></li>
+            <li><span>Handle</span><code>@lostboy</code></li>
+          </ul>
+        </article>
+
+        <article class="terminal-section" id="section-skills" aria-label="Skills">
+          <h2>// skills</h2>
+          <ul class="skills-grid">
+            <li>Web &amp; Network Testing — Burp Suite Pro, OWASP ZAP, Nmap, Nessus, OpenVAS</li>
+            <li>Recon &amp; Enumeration — Subfinder, Amass, Shodan, Gobuster, Censys</li>
+            <li>Credential &amp; Post-Exploitation — Hydra, Medusa, CrackMapExec, BloodHound, Mimikatz</li>
+            <li>Scripting &amp; Automation — Python, Bash, PowerShell, internal recon tooling</li>
+            <li>Cloud &amp; OS — AWS EC2/S3, AWS WAF, Cloudflare, Kali, Parrot, Ubuntu</li>
+            <li>Bug Bounty &amp; CTFs — writeups, challenge hosting, purple-team coaching</li>
+          </ul>
+          <p class="skills-note">
+            Certifications: CEH Practical v13, eJPT, ISO/IEC 27001 (ISA), CRTA/MCRTA, ICCA, IoT (Samsung Innovation Campus).
+          </p>
+        </article>
+
+        <article class="terminal-section" id="section-projects" aria-label="Projects">
+          <h2>// projects</h2>
+          <div class="projects-grid" id="projects-grid" aria-live="polite"></div>
+          <p class="projects-note">
+            Projects auto-sync from GitHub via JSON in <code>script.js</code>. Update handles or add repos to keep the terminal fresh.
+          </p>
+        </article>
+
+        <article class="terminal-section" id="section-certifications" aria-label="Certifications">
+          <h2>// certifications</h2>
+          <div class="cert-grid">
+            <article>
+              <h3>CEH Practical v13</h3>
+              <p>Enterprise exploitation, malware tooling, and blue-team evasion playbooks.</p>
+            </article>
+            <article>
+              <h3>eJPT</h3>
+              <p>Offensive recon, exploitation, and report writing with hands-on labs.</p>
+            </article>
+            <article>
+              <h3>ISO/IEC 27001 (ISA)</h3>
+              <p>Information Security Associate — compliance-driven governance and risk coverage.</p>
+            </article>
+            <article>
+              <h3>CRTA / MCRTA</h3>
+              <p>Certified (Multi-Cloud) Red Team Analyst — advanced operator tradecraft in hybrid estates.</p>
+            </article>
+            <article>
+              <h3>ICCA</h3>
+              <p>INE Certified Cloud Associate — cloud attack &amp; hardening foundations.</p>
+            </article>
+            <article>
+              <h3>IoT — Samsung Innovation Campus</h3>
+              <p>Secure IoT solution design with firmware and network considerations.</p>
+            </article>
+          </div>
+        </article>
+
+        <article class="terminal-section" id="section-contact" aria-label="Contact">
+          <h2>// contact</h2>
+          <ul class="contact-links">
+            <li><span>Email</span><a href="mailto:geek.divyanshu@gmail.com">geek.divyanshu@gmail.com</a></li>
+            <li><span>Phone</span><a href="tel:+916392700866">+91 63927 00866</a></li>
+            <li><span>LinkedIn</span><a href="https://linkedin.com/in/divyanshu-gupta-sec3107/" target="_blank" rel="noopener">linkedin.com/in/divyanshu-gupta-sec3107/</a></li>
+            <li><span>TryHackMe</span><a href="https://tryhackme.com/p/lostboy.31" target="_blank" rel="noopener">tryhackme.com/p/lostboy.31</a></li>
+          </ul>
+          <div class="qr-wrapper">
+            <canvas id="contact-qr" width="180" height="180" aria-label="QR code"></canvas>
+            <p>Scan to add contact. Auto-generates from email or handle.</p>
+          </div>
+        </article>
+
+        <article class="terminal-section" id="section-blog" aria-label="Blog">
+          <h2>// blog</h2>
+          <p>
+            Latest writeups start here: <a href="bugbounty101.html" target="_blank" rel="noopener">Bug Bounty 101 — First Report, First Reward</a>.
+          </p>
+          <p>Browse more at <a href="https://medium.com/@geek.divyanshu" target="_blank" rel="noopener">medium.com/@geek.divyanshu</a>.</p>
+        </article>
+      </section>
+
+      <section class="command-hints" aria-label="Command Shortcuts">
+        <p>
+          Type a command (start with <code>help</code> or <code>sudo su</code>) or press <kbd>1</kbd>-<kbd>6</kbd>. Stay idle to trigger the guided auto
+          walkthrough, or type <code>normal</code> to jump into the visual interface.
+        </p>
+        <ul>
+          <li><span>1</span><code>whoami</code></li>
+          <li><span>2</span><code>skills</code></li>
+          <li><span>3</span><code>projects</code></li>
+          <li><span>4</span><code>certifications</code></li>
+          <li><span>5</span><code>contact</code></li>
+          <li><span>6</span><code>blog</code></li>
+          <li><span>N</span><code>normal</code></li>
+        </ul>
+      </section>
+
+      <footer class="site-footer">
+        © <span id="footer-year"></span> lostboy.in — crafted in terminal mode.
+      </footer>
+    </main>
+
+    <section class="normal-mode" aria-label="Visual interface" tabindex="-1">
+      <nav class="normal-nav" role="navigation" aria-label="Normal mode pages">
+        <button type="button" class="normal-nav__link active" data-page="home">/home</button>
+        <button type="button" class="normal-nav__link" data-page="about">/about</button>
+        <button type="button" class="normal-nav__link" data-page="skills">/skills</button>
+        <button type="button" class="normal-nav__link" data-page="projects">/projects</button>
+        <button type="button" class="normal-nav__link" data-page="blog">/blog</button>
+        <button type="button" class="normal-nav__link" data-page="contact">/contact</button>
+      </nav>
+
+      <div class="normal-pages">
+        <section class="normal-page normal-page--active" data-page="home" id="home">
+          <div class="normal-hero">
+            <p class="normal-kicker">Cybersecurity Specialist</p>
+            <h1>Divyanshu Gupta</h1>
+            <p>
+              Hi, I’m Divyanshu Gupta — a cybersecurity enthusiast with hands-on experience in VAPT, web/API security testing, and bug bounty
+              hunting. I live for CTFs, Virat Kohli masterclasses, and even the occasional Clash of Clans grind.
+            </p>
+            <div class="normal-actions">
+              <a class="cta-link" href="#projects" data-page-link="projects">View Projects</a>
+              <a class="cta-link cta-link--secondary" href="#contact" data-page-link="contact">Get in Touch</a>
+            </div>
+          </div>
+          <div class="normal-runner" aria-hidden="true"></div>
+          <div class="stats-row">
+            <article>
+              <h3>200+</h3>
+              <p>Security Audits</p>
+            </article>
+            <article>
+              <h3>Zero Breaches</h3>
+              <p>Client Track Record</p>
+            </article>
+            <article>
+              <h3>24/7</h3>
+              <p>Threat Monitoring</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="normal-page" data-page="about" id="about">
+          <header>
+            <h2>/about</h2>
+            <p>
+              Hi, I’m Divyanshu Gupta — a cybersecurity enthusiast with hands-on experience across VAPT, web and API security, and bug bounty
+              hunting. I live for spotting vulnerabilities, dissecting flaws, and tightening defenses with real tooling and practical
+              methodologies.
+            </p>
+            <p>
+              When I’m not threat-hunting, I’m probably watching a Virat Kohli masterclass, grinding Clash of Clans, or jumping into a CTF to
+              swap tactics with other operators.
+            </p>
+          </header>
+          <div class="about-grid">
+            <article class="normal-card">
+              <h3>University of Lucknow</h3>
+              <p>Bachelor of Computer Applications — June 2024</p>
+              <p>Specialized in secure software patterns, exploit dev labs, and applied cryptography research.</p>
+            </article>
+            <article class="normal-card">
+              <h3>Community Missions</h3>
+              <ul class="normal-list">
+                <li><strong>Digital Yodha Foundation:</strong> Volunteer speaker & mentor for cyber awareness.</li>
+                <li><strong>Cyber Cell, Lucknow:</strong> Cyber volunteer supporting incident response outreach.</li>
+              </ul>
+            </article>
+            <article class="normal-card">
+              <h3>Location &amp; Contact</h3>
+              <ul class="normal-contact">
+                <li><strong>Location</strong><span>Lucknow, Uttar Pradesh</span></li>
+                <li><strong>Phone</strong><a href="tel:+916392700866">+91 63927 00866</a></li>
+                <li><strong>Email</strong><a href="mailto:geek.divyanshu@gmail.com">geek.divyanshu@gmail.com</a></li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="normal-page" data-page="skills" id="skills">
+          <header>
+            <h2>/skills</h2>
+            <p>Stacks tuned for offensive recon, full-scope exploitation, and rapid remediation guidance.</p>
+          </header>
+          <div class="skills-columns">
+            <article class="normal-card">
+              <h3>Web &amp; Network Testing</h3>
+              <p>Burp Suite Pro, OWASP ZAP, Nmap, Nessus, OpenVAS, Acunetix, Nikto.</p>
+              <h3>Recon &amp; Enumeration</h3>
+              <p>Subfinder, WhatWeb, Wappalyzer, Amass, Shodan, Gobuster, Censys.</p>
+            </article>
+            <article class="normal-card">
+              <h3>Credential &amp; Post-Exploitation</h3>
+              <p>Hydra, Medusa, CrackMapExec, BloodHound, Mimikatz.</p>
+              <h3>Scripting &amp; Automation</h3>
+              <p>Python, Bash, PowerShell — custom recon tooling reduced scanning by 40%.</p>
+              <h3>Cloud &amp; OS</h3>
+              <p>AWS EC2/S3, AWS WAF, Cloudflare • Kali, Parrot, Ubuntu, Windows.</p>
+            </article>
+            <article class="normal-card normal-card--highlight">
+              <h3>Certifications</h3>
+              <ul>
+                <li>CEH Practical v13</li>
+                <li>eJPT</li>
+                <li>ISO/IEC 27001 (Information Security Associate™)</li>
+                <li>CRTA &amp; MCRTA</li>
+                <li>ICCA</li>
+                <li>IoT — Samsung Innovation Campus</li>
+              </ul>
+              <h3>Platforms</h3>
+              <p>
+                <a href="https://tryhackme.com/p/lostboy.31" target="_blank" rel="noopener">TryHackMe — lostboy.31</a>
+              </p>
+              <div class="thm-badge">
+                <iframe
+                  src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=876393"
+                  title="TryHackMe Badges"
+                  loading="lazy"
+                  style="border: none; width: 100%; min-height: 260px"
+                ></iframe>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="normal-page" data-page="projects" id="projects">
+          <header>
+            <h2>/projects</h2>
+            <p>Recent missions blending red teaming, compliance, and enablement for high-trust orgs.</p>
+          </header>
+          <div class="experience-grid">
+            <article class="normal-card project-card">
+              <h3>Stegg</h3>
+              <p>Python steganography toolkit for hiding payloads in images/audio with audit-friendly logging.</p>
+              <ul>
+                <li>Supports multiple cover types and reversible detection checks.</li>
+                <li>CLI flags for batch operations + artifact validation.</li>
+              </ul>
+              <a href="https://github.com/div3107/Stegg" target="_blank" rel="noopener">View Repo →</a>
+            </article>
+            <article class="normal-card project-card">
+              <h3>PowerShell Network Scanning Scripts</h3>
+              <p>Modular network reconnaissance scripts for Windows environments.</p>
+              <ul>
+                <li>Enumerates hosts, services, and shares in regulated bank networks.</li>
+                <li>Outputs CSV/JSON for instant reporting and threat-modeling.</li>
+              </ul>
+              <a href="https://github.com/div3107/Powershell_network_scanning_scripts" target="_blank" rel="noopener">View Repo →</a>
+            </article>
+            <article class="normal-card project-card">
+              <h3>Flags &amp; Labs Hub</h3>
+              <p>Detailed Chill Guy challenge notes capturing flags, payloads, and exploit reasoning.</p>
+              <ul>
+                <li>Step-by-step writeups covering methodology and countermeasures.</li>
+                <li>Living document that feeds upcoming workshops and content drops.</li>
+              </ul>
+              <a href="https://github.com/div3107/Chill-guy/blob/main/README.md" target="_blank" rel="noopener">Read Notes →</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="normal-page" data-page="contact" id="contact">
+          <header>
+            <h2>/contact</h2>
+            <p>Ready for audits, CTF collabs, or just swapping tactics? Here’s how to reach me.</p>
+          </header>
+          <div class="contact-grid">
+            <article class="normal-card normal-card--wide">
+              <h3>Secure Channels</h3>
+              <ul class="normal-contact">
+                <li><strong>Email</strong><a href="mailto:geek.divyanshu@gmail.com">geek.divyanshu@gmail.com</a></li>
+                <li><strong>Phone</strong><a href="tel:+916392700866">+91 63927 00866</a></li>
+                <li><strong>LinkedIn</strong><a href="https://linkedin.com/in/divyanshu-gupta-sec3107/" target="_blank" rel="noopener">linkedin.com/in/divyanshu-gupta-sec3107/</a></li>
+              </ul>
+              <div class="normal-actions">
+                <button class="mode-return" id="mode-return" type="button">Return to Terminal</button>
+                <a class="cta-link" href="https://medium.com/@geek.divyanshu" target="_blank" rel="noopener">Read Medium</a>
+              </div>
+            </article>
+            <article class="normal-card">
+              <h3>Platforms</h3>
+              <p>TryHackMe, CTFs, and ongoing lab experiments start here:</p>
+              <p><a href="https://tryhackme.com/p/lostboy.31" target="_blank" rel="noopener">tryhackme.com/p/lostboy.31</a></p>
+              <p class="contact-blog-note">Latest writeups hit the <strong>/blog</strong> page first.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="normal-page" data-page="blog" id="blog">
+          <header>
+            <h2>/blog</h2>
+            <p>Hand-picked writeups hosted on Medium and linked from this site first. New labs &amp; playbooks drop here.</p>
+          </header>
+          <div class="blog-feed" id="blog-feed" aria-live="polite"></div>
+          <a class="cta-link" href="https://medium.com/@geek.divyanshu" target="_blank" rel="noopener">Open Medium Profile</a>
+        </section>
+      </div>
+    </section>
+  </body>
+</html>

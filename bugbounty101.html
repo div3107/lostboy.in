@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Bounty 101 — Divyanshu Gupta</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        background: radial-gradient(circle at 20% 20%, rgba(39, 77, 147, 0.3), transparent 40%), #050912;
+        color: #e6edff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      main {
+        width: min(900px, 100%);
+        background: rgba(5, 11, 23, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1.5rem;
+        padding: clamp(1.5rem, 4vw, 3rem);
+        box-shadow: 0 30px 80px rgba(2, 6, 15, 0.7);
+      }
+      h1 {
+        margin-top: 0;
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: #f4f7ff;
+      }
+      .lede {
+        font-size: 1.05rem;
+        color: rgba(230, 237, 255, 0.85);
+      }
+      figure {
+        margin: 2rem 0;
+        text-align: center;
+      }
+      figure img {
+        max-width: 100%;
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      h2 {
+        color: #8cdcff;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 1rem;
+        margin-top: 2rem;
+      }
+      ul {
+        padding-left: 1.2rem;
+      }
+      .cta-row {
+        margin-top: 2rem;
+        display: flex;
+        gap: 1rem;
+      }
+      .cta-row a {
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 0.7rem 1.6rem;
+        font-size: 0.85rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #050912;
+        background: #f7fbff;
+      }
+      .cta-row a.secondary {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="lede">Bug Bounty 101 — First Report, First Reward</p>
+      <h1>How a "small" finding earned my first bounty</h1>
+      <p>
+        For months, I devoured epic bug bounty writeups on Medium — tales of RCEs, four-digit rewards, and elite operators. Inspiring? Yes.
+        Intimidating? Absolutely. This is the story of how I earned my first bounty anyway.
+      </p>
+      <section>
+        <h2>The start</h2>
+        <p>
+          As a beginner, I spent hours scanning targets, understanding stack footprints, and figuring out what platforms really wanted. On one
+          program, I spotted an outdated WordPress plugin and reported it. Days later, I received the dreaded response: “WordPress
+          vulnerabilities fall under Things We Are Not Looking For.” Not exactly the dream reply.
+        </p>
+      </section>
+      <section>
+        <h2>The unexpected twist</h2>
+        <figure>
+          <img src="assets/bugreply.png" alt="Bug bounty reply screenshot" />
+          <figcaption>“Your report did help us identify an issue… enjoy a LOW Tier bounty.”</figcaption>
+        </figure>
+        <p>
+          Even though the plugin version wasn’t vulnerable, my report highlighted a blind spot in their internal tracking system. The security
+          team thanked me — and rewarded me with their LOW tier bounty. Not huge, but priceless for momentum.
+        </p>
+      </section>
+      <section>
+        <h2>What I learned</h2>
+        <ul>
+          <li><strong>Small matters:</strong> You don’t need a zero-day; any security-improving insight has value.</li>
+          <li><strong>Accuracy + honesty:</strong> My initial assumption was off, but transparent reporting still earned trust.</li>
+          <li><strong>Document everything:</strong> Versions, screenshots, reproduction steps — detail wins.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Final thoughts</h2>
+        <p>
+          If you’re at the starting line, wondering if your skills are “enough,” this story is for you. Start small. Be curious. Report
+          responsibly. You never know which “small issue” might earn your first bounty — or change how a company secures its users. This is just
+          the start of my journey.
+        </p>
+      </section>
+      <div class="cta-row">
+        <a href="index.html">Back to Portfolio</a>
+        <a class="secondary" href="https://medium.com/@geek.divyanshu" target="_blank" rel="noopener">Read more on Medium</a>
+      </div>
+    </main>
+  </body>
+</html>

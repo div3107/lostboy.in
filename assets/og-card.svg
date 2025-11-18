@@ -1,0 +1,9 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="42" fill="#05070E"/>
+  <rect x="60" y="60" width="1080" height="510" rx="32" fill="#0F111A" stroke="#67FF8A" stroke-width="4" stroke-dasharray="12 16"/>
+  <text x="120" y="190" fill="#67FF8A" font-family="JetBrains Mono, 'Fira Code', monospace" font-size="48" letter-spacing="0.2em">lostboy@ops</text>
+  <text x="120" y="260" fill="#FFFFFF" opacity="0.8" font-family="JetBrains Mono, 'Fira Code', monospace" font-size="32">whoami && skills && projects && contact</text>
+  <text x="120" y="350" fill="#67FF8A" font-family="JetBrains Mono, 'Fira Code', monospace" font-size="64">lostboy.in</text>
+  <text x="120" y="420" fill="#7BD5FF" font-family="JetBrains Mono, 'Fira Code', monospace" font-size="28">Cybersecurity Terminal Portfolio</text>
+  <text x="120" y="480" fill="#FFB347" font-family="JetBrains Mono, 'Fira Code', monospace" font-size="24">Red Teaming · DFIR · Threat Hunting · Malware Analysis</text>
+</svg>
