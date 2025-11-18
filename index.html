@@ -50,7 +50,9 @@
     <main class="terminal-wrapper" role="main">
       <header class="terminal-header">
         <div class="brand">
-          <img src="assets/cursor.svg" alt="Terminal cursor" width="20" height="20" />
+          <svg width="20" height="20" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+            <path d="M3 2L15 9L9.8 10.6L13 15L10.6 16.5L7.4 12L5 15.2L3 2Z" fill="#67FF8A" stroke="#0B0E16" stroke-width="1.2" />
+          </svg>
           <div>
             <span class="brand-handle">@lostboy</span>
             <span class="brand-domain">lostboy.in</span>
@@ -65,8 +67,21 @@
             <span class="mode-switch__label">Normal Mode</span>
           </button>
           <button class="theme-toggle" type="button" aria-label="Toggle theme">
-            <img src="assets/icon-sun.svg" alt="" class="theme-icon theme-icon--light" />
-            <img src="assets/icon-moon.svg" alt="" class="theme-icon theme-icon--dark" />
+            <svg class="theme-icon theme-icon--light" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4.5" stroke="#FFB347" stroke-width="1.5" />
+              <path
+                d="M12 2V5M12 19V22M4.93 4.93L7.05 7.05M16.95 16.95L19.07 19.07M2 12H5M19 12H22M4.93 19.07L7.05 16.95M16.95 7.05L19.07 4.93"
+                stroke="#FFB347"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg class="theme-icon theme-icon--dark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M20.5 14.5C15.75 14.5 11.5 10.25 11.5 5.5C11.5 4.14 11.77 2.85 12.25 1.66C6.74 2.43 2.5 7.21 2.5 12.92C2.5 18.94 7.35 23.79 13.37 23.79C17.66 23.79 21.36 21.34 23.22 17.79C22.32 18.03 21.39 18.16 20.43 18.16C20.48 17.62 20.5 17.07 20.5 16.51C20.5 15.82 20.48 15.15 20.43 14.5H20.5Z"
+                fill="#7BD5FF"
+              />
+            </svg>
           </button>
         </div>
       </header>
