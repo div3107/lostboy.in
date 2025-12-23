@@ -6,12 +6,8 @@ const sectionMap = new Map([...sections].map((section) => [section.id, section])
 const themeToggle = document.querySelector(".theme-toggle");
 const wrapper = document.querySelector(".terminal-wrapper");
 const footerYear = document.getElementById("footer-year");
-const commandInput = document.getElementById("terminal-command");
-const modeSwitchBtn = document.getElementById("mode-switch");
-const modeSwitchLabel = modeSwitchBtn?.querySelector(".mode-switch__label");
-const normalModeReturn = document.getElementById("mode-return");
 const body = document.body;
-const normalModeSection = document.querySelector(".normal-mode");
+const portfolioSection = document.querySelector(".portfolio");
 const normalNavLinks = document.querySelectorAll(".normal-nav__link");
 const normalPageSections = document.querySelectorAll(".normal-page");
 const normalPageLinks = document.querySelectorAll("[data-page-link]");
@@ -19,7 +15,6 @@ const blogFeed = document.getElementById("blog-feed");
 const promptText = "lostboy@ops:~$ ";
 const IDLE_AUTO_DELAY = 9000;
 const MAX_TERMINAL_LINES = 36;
-const MODE_STORAGE_KEY = "lostboy-interface";
 const commandSequence = [
   {
     command: "whoami",
@@ -290,16 +285,6 @@ function processCommand(inputValue) {
     showSudoSuResponse();
     return;
   }
-  if (normalized === "normal" || normalized === "mode normal") {
-    activateNormalMode({ announce: false });
-    appendLine("Visual interface engaged. Use the Return to Terminal button or type `terminal` to come back.");
-    return;
-  }
-  if (normalized === "terminal" || normalized === "mode terminal") {
-    activateTerminalMode({ announce: false });
-    appendLine("Terminal interface restored.");
-    return;
-  }
   const command = commandSequence.find((item) => item.command === normalized);
   if (command) {
     displayCommandSection(command.sectionId);
@@ -448,6 +433,7 @@ function renderContactQr() {
   });
 }
 function initFooterYear() {
+  if (!footerYear) return;
   const year = new Date().getFullYear();
   footerYear.textContent = year;
 }
@@ -481,50 +467,6 @@ function initCommandInput() {
     markUserInteraction();
   });
 }
-function activateNormalMode({ announce = true } = {}) {
-  body?.classList.add("mode-normal");
-  body?.classList.remove("mode-terminal");
-  localStorage.setItem(MODE_STORAGE_KEY, "normal");
-  updateModeToggleLabel();
-  showNormalPage(currentNormalPage);
-  if (announce && bootComplete) {
-    appendLine("> Normal mode engaged. Explore the visual interface.");
-  }
-  normalModeSection?.focus({ preventScroll: true });
-}
-function activateTerminalMode({ announce = true } = {}) {
-  body?.classList.add("mode-terminal");
-  body?.classList.remove("mode-normal");
-  localStorage.setItem(MODE_STORAGE_KEY, "terminal");
-  updateModeToggleLabel();
-  if (announce && bootComplete) {
-    appendLine("> Terminal mode active.");
-  }
-  commandInput?.focus({ preventScroll: true });
-}
-function updateModeToggleLabel() {
-  if (!modeSwitchLabel) return;
-  const showingTerminal = body?.classList.contains("mode-terminal");
-  modeSwitchLabel.textContent = showingTerminal ? "Normal Mode" : "Terminal Mode";
-}
-function initModeSwitch() {
-  const storedMode = localStorage.getItem(MODE_STORAGE_KEY);
-  if (storedMode === "normal") {
-    activateNormalMode({ announce: false });
-  } else {
-    updateModeToggleLabel();
-  }
-  modeSwitchBtn?.addEventListener("click", () => {
-    if (body?.classList.contains("mode-normal")) {
-      activateTerminalMode({ announce: true });
-    } else {
-      activateNormalMode({ announce: true });
-    }
-  });
-  normalModeReturn?.addEventListener("click", () => {
-    activateTerminalMode({ announce: false });
-  });
-}
 function showNormalPage(page) {
   if (!normalPageSections.length) return;
   const matched = [...normalPageSections].find((section) => section.dataset.page === page);
@@ -555,17 +497,10 @@ function initNormalPages() {
   });
 }
 function init() {
-  renderProjects();
   renderBlogFeed();
   initThemeToggle();
-  initKeyboardShortcuts();
-  initFooterYear();
   renderContactQr();
-  initNeonModeToggle();
-  initCommandInput();
-  initModeSwitch();
   initNormalPages();
-  runBootSequence();
   window.addEventListener(
     "pointerdown",
     () => {
