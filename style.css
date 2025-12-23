@@ -1021,13 +1021,14 @@ body::before {
 
 @media (max-width: 520px) {
   body {
-    padding: 1.25rem 0;
+    padding: 0;
   }
 
   .portfolio {
     width: min(960px, 94vw);
-    padding: 1.25rem;
+    padding: 1rem;
     gap: 1.5rem;
+    overflow: visible;
   }
 
   .portfolio::before,
