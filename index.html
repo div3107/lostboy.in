@@ -3,22 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>lostboy.in — Cybersecurity Terminal Portfolio</title>
+    <title>lostboy.in — Cybersecurity Portfolio</title>
     <meta
       name="description"
-      content="lostboy — Offensive security specialist. Explore skills, projects, and certifications via a responsive Linux terminal interface."
+      content="lostboy — Offensive security specialist. Explore skills, projects, certifications, and contact details."
     />
-    <meta name="keywords" content="lostboy, cybersecurity, hacker, terminal portfolio, red team" />
+    <meta name="keywords" content="lostboy, cybersecurity, hacker, portfolio, red team" />
     <meta name="author" content="lostboy" />
     <meta name="theme-color" content="#0f111a" />
-    <meta property="og:title" content="lostboy — Cybersecurity Terminal" />
-    <meta property="og:description" content="Walk through skills, projects, and contact info in a cyberpunk Linux terminal." />
+    <meta property="og:title" content="lostboy — Cybersecurity Portfolio" />
+    <meta property="og:description" content="Explore skills, projects, certifications, and contact info." />
     <meta property="og:image" content="assets/og-card.svg" />
     <meta property="og:url" content="https://lostboy.in" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="lostboy — Cybersecurity Terminal" />
-    <meta name="twitter:description" content="Lostboy's cybersecurity dossier rendered as an interactive Linux terminal." />
+    <meta name="twitter:title" content="lostboy — Cybersecurity Portfolio" />
+    <meta name="twitter:description" content="Lostboy's cybersecurity dossier rendered as a modern portfolio." />
     <meta name="twitter:image" content="assets/og-card.svg" />
     <link rel="canonical" href="https://lostboy.in" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
@@ -40,186 +40,17 @@
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" type="module" defer></script>
   </head>
-  <body class="mode-terminal">
+  <body>
     <noscript>
       <div class="noscript-warning">
-        JavaScript is required for the interactive terminal experience. Please enable it to continue.
+        JavaScript is required for the interactive experience. Please enable it to continue.
       </div>
     </noscript>
 
-    <main class="terminal-wrapper" role="main">
-      <header class="terminal-header">
-        <div class="brand">
-          <svg width="20" height="20" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
-            <path d="M3 2L15 9L9.8 10.6L13 15L10.6 16.5L7.4 12L5 15.2L3 2Z" fill="#67FF8A" stroke="#0B0E16" stroke-width="1.2" />
-          </svg>
-          <div>
-            <span class="brand-handle">@lostboy</span>
-            <span class="brand-domain">lostboy.in</span>
-          </div>
-        </div>
-        <div class="header-actions">
-          <div class="status-indicator" role="status" aria-live="polite">
-            <span class="status-dot"></span>
-            <span>STATUS: ACTIVE</span>
-          </div>
-          <button class="mode-switch" id="mode-switch" type="button" aria-label="Switch to normal view">
-            <span class="mode-switch__label">Normal Mode</span>
-          </button>
-          <button class="theme-toggle" type="button" aria-label="Toggle theme">
-            <svg class="theme-icon theme-icon--light" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <circle cx="12" cy="12" r="4.5" stroke="#FFB347" stroke-width="1.5" />
-              <path
-                d="M12 2V5M12 19V22M4.93 4.93L7.05 7.05M16.95 16.95L19.07 19.07M2 12H5M19 12H22M4.93 19.07L7.05 16.95M16.95 7.05L19.07 4.93"
-                stroke="#FFB347"
-                stroke-width="1.5"
-                stroke-linecap="round"
-              />
-            </svg>
-            <svg class="theme-icon theme-icon--dark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path
-                d="M20.5 14.5C15.75 14.5 11.5 10.25 11.5 5.5C11.5 4.14 11.77 2.85 12.25 1.66C6.74 2.43 2.5 7.21 2.5 12.92C2.5 18.94 7.35 23.79 13.37 23.79C17.66 23.79 21.36 21.34 23.22 17.79C22.32 18.03 21.39 18.16 20.43 18.16C20.48 17.62 20.5 17.07 20.5 16.51C20.5 15.82 20.48 15.15 20.43 14.5H20.5Z"
-                fill="#7BD5FF"
-              />
-            </svg>
-          </button>
-        </div>
-      </header>
+    <canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
 
-      <section class="terminal-screen" aria-live="polite">
-        <div class="terminal-output" id="terminal-output"></div>
-        <div class="terminal-input">
-          <label class="sr-only" for="terminal-command">Terminal command input</label>
-          <span class="prompt">lostboy@ops:~$</span>
-          <input
-            id="terminal-command"
-            type="text"
-            name="terminal-command"
-            inputmode="text"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="none"
-            spellcheck="false"
-            aria-label="Type a command such as help, whoami, skills"
-          />
-        </div>
-        <div class="typed-cursor" id="terminal-cursor"></div>
-      </section>
-
-      <section class="terminal-sections">
-        <article class="terminal-section" id="section-whoami" aria-label="Who Am I">
-          <h2>// whoami</h2>
-          <p>
-            Hi, I’m <strong>Divyanshu Gupta</strong> — a cybersecurity enthusiast with hands-on experience in VAPT, web/API security testing, and
-            bug bounty hunting. I live for spotting vulnerabilities, dissecting flaws, and tightening defenses with practical tooling.
-          </p>
-          <p>Catch me at CTFs, cheering for Virat Kohli, or finishing a Clash of Clans raid between assessments.</p>
-          <ul class="whoami-links">
-            <li><span>Website</span><a href="https://lostboy.in" target="_blank" rel="noopener">lostboy.in</a></li>
-            <li><span>Email</span><a href="mailto:geek.divyanshu@gmail.com">geek.divyanshu@gmail.com</a></li>
-            <li><span>Handle</span><code>@lostboy</code></li>
-          </ul>
-        </article>
-
-        <article class="terminal-section" id="section-skills" aria-label="Skills">
-          <h2>// skills</h2>
-          <ul class="skills-grid">
-            <li>Web &amp; Network Testing — Burp Suite Pro, OWASP ZAP, Nmap, Nessus, OpenVAS</li>
-            <li>Recon &amp; Enumeration — Subfinder, Amass, Shodan, Gobuster, Censys</li>
-            <li>Credential &amp; Post-Exploitation — Hydra, Medusa, CrackMapExec, BloodHound, Mimikatz</li>
-            <li>Scripting &amp; Automation — Python, Bash, PowerShell, internal recon tooling</li>
-            <li>Cloud &amp; OS — AWS EC2/S3, AWS WAF, Cloudflare, Kali, Parrot, Ubuntu</li>
-            <li>Bug Bounty &amp; CTFs — writeups, challenge hosting, purple-team coaching</li>
-          </ul>
-          <p class="skills-note">
-            Certifications: CEH Practical v13, eJPT, ISO/IEC 27001 (ISA), CRTA/MCRTA, ICCA, IoT (Samsung Innovation Campus).
-          </p>
-        </article>
-
-        <article class="terminal-section" id="section-projects" aria-label="Projects">
-          <h2>// projects</h2>
-          <div class="projects-grid" id="projects-grid" aria-live="polite"></div>
-          <p class="projects-note">
-            Projects auto-sync from GitHub via JSON in <code>script.js</code>. Update handles or add repos to keep the terminal fresh.
-          </p>
-        </article>
-
-        <article class="terminal-section" id="section-certifications" aria-label="Certifications">
-          <h2>// certifications</h2>
-          <div class="cert-grid">
-            <article>
-              <h3>CEH Practical v13</h3>
-              <p>Enterprise exploitation, malware tooling, and blue-team evasion playbooks.</p>
-            </article>
-            <article>
-              <h3>eJPT</h3>
-              <p>Offensive recon, exploitation, and report writing with hands-on labs.</p>
-            </article>
-            <article>
-              <h3>ISO/IEC 27001 (ISA)</h3>
-              <p>Information Security Associate — compliance-driven governance and risk coverage.</p>
-            </article>
-            <article>
-              <h3>CRTA / MCRTA</h3>
-              <p>Certified (Multi-Cloud) Red Team Analyst — advanced operator tradecraft in hybrid estates.</p>
-            </article>
-            <article>
-              <h3>ICCA</h3>
-              <p>INE Certified Cloud Associate — cloud attack &amp; hardening foundations.</p>
-            </article>
-            <article>
-              <h3>IoT — Samsung Innovation Campus</h3>
-              <p>Secure IoT solution design with firmware and network considerations.</p>
-            </article>
-          </div>
-        </article>
-
-        <article class="terminal-section" id="section-contact" aria-label="Contact">
-          <h2>// contact</h2>
-          <ul class="contact-links">
-            <li><span>Email</span><a href="mailto:geek.divyanshu@gmail.com">geek.divyanshu@gmail.com</a></li>
-            <li><span>Phone</span><a href="tel:+916392700866">+91 63927 00866</a></li>
-            <li><span>LinkedIn</span><a href="https://linkedin.com/in/divyanshu-gupta-sec3107/" target="_blank" rel="noopener">linkedin.com/in/divyanshu-gupta-sec3107/</a></li>
-            <li><span>TryHackMe</span><a href="https://tryhackme.com/p/lostboy.31" target="_blank" rel="noopener">tryhackme.com/p/lostboy.31</a></li>
-          </ul>
-          <div class="qr-wrapper">
-            <canvas id="contact-qr" width="180" height="180" aria-label="QR code"></canvas>
-            <p>Scan to add contact. Auto-generates from email or handle.</p>
-          </div>
-        </article>
-
-        <article class="terminal-section" id="section-blog" aria-label="Blog">
-          <h2>// blog</h2>
-          <p>
-            Latest writeups start here: <a href="bugbounty101.html" target="_blank" rel="noopener">Bug Bounty 101 — First Report, First Reward</a>.
-          </p>
-          <p>Browse more at <a href="https://medium.com/@geek.divyanshu" target="_blank" rel="noopener">medium.com/@geek.divyanshu</a>.</p>
-        </article>
-      </section>
-
-      <section class="command-hints" aria-label="Command Shortcuts">
-        <p>
-          Type a command (start with <code>help</code> or <code>sudo su</code>) or press <kbd>1</kbd>-<kbd>6</kbd>. Stay idle to trigger the guided auto
-          walkthrough, or type <code>normal</code> to jump into the visual interface.
-        </p>
-        <ul>
-          <li><span>1</span><code>whoami</code></li>
-          <li><span>2</span><code>skills</code></li>
-          <li><span>3</span><code>projects</code></li>
-          <li><span>4</span><code>certifications</code></li>
-          <li><span>5</span><code>contact</code></li>
-          <li><span>6</span><code>blog</code></li>
-          <li><span>N</span><code>normal</code></li>
-        </ul>
-      </section>
-
-      <footer class="site-footer">
-        © <span id="footer-year"></span> lostboy.in — crafted in terminal mode.
-      </footer>
-    </main>
-
-    <section class="normal-mode" aria-label="Visual interface" tabindex="-1">
-      <nav class="normal-nav" role="navigation" aria-label="Normal mode pages">
+    <main class="portfolio" aria-label="Portfolio" tabindex="-1" role="main">
+      <nav class="normal-nav" role="navigation" aria-label="Pages">
         <button type="button" class="normal-nav__link active" data-page="home">/home</button>
         <button type="button" class="normal-nav__link" data-page="about">/about</button>
         <button type="button" class="normal-nav__link" data-page="skills">/skills</button>
@@ -392,7 +223,6 @@
                 <li><strong>LinkedIn</strong><a href="https://linkedin.com/in/divyanshu-gupta-sec3107/" target="_blank" rel="noopener">linkedin.com/in/divyanshu-gupta-sec3107/</a></li>
               </ul>
               <div class="normal-actions">
-                <button class="mode-return" id="mode-return" type="button">Return to Terminal</button>
                 <a class="cta-link" href="https://medium.com/@geek.divyanshu" target="_blank" rel="noopener">Read Medium</a>
               </div>
             </article>
@@ -414,6 +244,6 @@
           <a class="cta-link" href="https://medium.com/@geek.divyanshu" target="_blank" rel="noopener">Open Medium Profile</a>
         </section>
       </div>
-    </section>
+    </main>
   </body>
 </html>

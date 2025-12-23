@@ -6,12 +6,8 @@ const sectionMap = new Map([...sections].map((section) => [section.id, section])
 const themeToggle = document.querySelector(".theme-toggle");
 const wrapper = document.querySelector(".terminal-wrapper");
 const footerYear = document.getElementById("footer-year");
-const commandInput = document.getElementById("terminal-command");
-const modeSwitchBtn = document.getElementById("mode-switch");
-const modeSwitchLabel = modeSwitchBtn?.querySelector(".mode-switch__label");
-const normalModeReturn = document.getElementById("mode-return");
 const body = document.body;
-const normalModeSection = document.querySelector(".normal-mode");
+const portfolioSection = document.querySelector(".portfolio");
 const normalNavLinks = document.querySelectorAll(".normal-nav__link");
 const normalPageSections = document.querySelectorAll(".normal-page");
 const normalPageLinks = document.querySelectorAll("[data-page-link]");
@@ -19,7 +15,6 @@ const blogFeed = document.getElementById("blog-feed");
 const promptText = "lostboy@ops:~$ ";
 const IDLE_AUTO_DELAY = 9000;
 const MAX_TERMINAL_LINES = 36;
-const MODE_STORAGE_KEY = "lostboy-interface";
 const commandSequence = [
   {
     command: "whoami",
@@ -161,6 +156,108 @@ let commandQueuePromise = Promise.resolve();
 let currentNormalPage = "home";
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const randomDelay = () => Math.floor(Math.random() * (90 - 35 + 1)) + 35;
+
+function initStarfield() {
+  const canvas = document.getElementById("starfield");
+  if (!canvas) return;
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  let rafId = null;
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+
+  const STAR_COUNT = 220;
+  const SPEED_MIN = 0.08;
+  const SPEED_MAX = 0.45;
+  const stars = [];
+
+  const rand = (min, max) => min + Math.random() * (max - min);
+
+  function resize() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    width = Math.floor(window.innerWidth);
+    height = Math.floor(window.innerHeight);
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function resetStar(star, initial = false) {
+    star.x = rand(0, width);
+    star.y = initial ? rand(0, height) : -rand(0, height * 0.2);
+    star.z = rand(0.2, 1);
+    star.r = rand(0.6, 1.8) * star.z;
+    star.v = rand(SPEED_MIN, SPEED_MAX) * (0.35 + star.z);
+    star.a = rand(0.25, 0.9);
+  }
+
+  function initStars() {
+    stars.length = 0;
+    for (let i = 0; i < STAR_COUNT; i += 1) {
+      const star = { x: 0, y: 0, z: 1, r: 1, v: 0.2, a: 0.6 };
+      resetStar(star, true);
+      stars.push(star);
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    const gradient = ctx.createRadialGradient(width * 0.25, height * 0.2, 0, width * 0.25, height * 0.2, Math.max(width, height));
+    gradient.addColorStop(0, "rgba(103, 255, 138, 0.08)");
+    gradient.addColorStop(0.55, "rgba(123, 213, 255, 0.05)");
+    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+    for (let i = 0; i < stars.length; i += 1) {
+      const s = stars[i];
+      ctx.globalAlpha = s.a;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function tick() {
+    if (!prefersReducedMotion) {
+      for (let i = 0; i < stars.length; i += 1) {
+        const s = stars[i];
+        s.y += s.v;
+        s.x += Math.sin((s.y / 110) * s.z) * 0.15;
+        if (s.y - s.r > height) resetStar(s);
+      }
+    }
+    draw();
+    rafId = window.requestAnimationFrame(tick);
+  }
+
+  resize();
+  initStars();
+  tick();
+
+  window.addEventListener("resize", () => {
+    resize();
+    initStars();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (rafId) window.cancelAnimationFrame(rafId);
+      rafId = null;
+      return;
+    }
+    if (!rafId) tick();
+  });
+}
 const showCursor = () => {
   if (cursor) cursor.style.display = "block";
 };
@@ -288,16 +385,6 @@ function processCommand(inputValue) {
   }
   if (normalized === "sudo su") {
     showSudoSuResponse();
-    return;
-  }
-  if (normalized === "normal" || normalized === "mode normal") {
-    activateNormalMode({ announce: false });
-    appendLine("Visual interface engaged. Use the Return to Terminal button or type `terminal` to come back.");
-    return;
-  }
-  if (normalized === "terminal" || normalized === "mode terminal") {
-    activateTerminalMode({ announce: false });
-    appendLine("Terminal interface restored.");
     return;
   }
   const command = commandSequence.find((item) => item.command === normalized);
@@ -448,6 +535,7 @@ function renderContactQr() {
   });
 }
 function initFooterYear() {
+  if (!footerYear) return;
   const year = new Date().getFullYear();
   footerYear.textContent = year;
 }
@@ -481,50 +569,6 @@ function initCommandInput() {
     markUserInteraction();
   });
 }
-function activateNormalMode({ announce = true } = {}) {
-  body?.classList.add("mode-normal");
-  body?.classList.remove("mode-terminal");
-  localStorage.setItem(MODE_STORAGE_KEY, "normal");
-  updateModeToggleLabel();
-  showNormalPage(currentNormalPage);
-  if (announce && bootComplete) {
-    appendLine("> Normal mode engaged. Explore the visual interface.");
-  }
-  normalModeSection?.focus({ preventScroll: true });
-}
-function activateTerminalMode({ announce = true } = {}) {
-  body?.classList.add("mode-terminal");
-  body?.classList.remove("mode-normal");
-  localStorage.setItem(MODE_STORAGE_KEY, "terminal");
-  updateModeToggleLabel();
-  if (announce && bootComplete) {
-    appendLine("> Terminal mode active.");
-  }
-  commandInput?.focus({ preventScroll: true });
-}
-function updateModeToggleLabel() {
-  if (!modeSwitchLabel) return;
-  const showingTerminal = body?.classList.contains("mode-terminal");
-  modeSwitchLabel.textContent = showingTerminal ? "Normal Mode" : "Terminal Mode";
-}
-function initModeSwitch() {
-  const storedMode = localStorage.getItem(MODE_STORAGE_KEY);
-  if (storedMode === "normal") {
-    activateNormalMode({ announce: false });
-  } else {
-    updateModeToggleLabel();
-  }
-  modeSwitchBtn?.addEventListener("click", () => {
-    if (body?.classList.contains("mode-normal")) {
-      activateTerminalMode({ announce: true });
-    } else {
-      activateNormalMode({ announce: true });
-    }
-  });
-  normalModeReturn?.addEventListener("click", () => {
-    activateTerminalMode({ announce: false });
-  });
-}
 function showNormalPage(page) {
   if (!normalPageSections.length) return;
   const matched = [...normalPageSections].find((section) => section.dataset.page === page);
@@ -555,17 +599,11 @@ function initNormalPages() {
   });
 }
 function init() {
-  renderProjects();
   renderBlogFeed();
   initThemeToggle();
-  initKeyboardShortcuts();
-  initFooterYear();
   renderContactQr();
-  initNeonModeToggle();
-  initCommandInput();
-  initModeSwitch();
+  initStarfield();
   initNormalPages();
-  runBootSequence();
   window.addEventListener(
     "pointerdown",
     () => {
