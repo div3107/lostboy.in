@@ -72,6 +72,16 @@ body::before {
   z-index: 0;
 }
 
+.starfield {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
 
 
 .noscript-warning {
@@ -536,6 +546,7 @@ body::before {
   box-shadow: 0 35px 90px rgba(3, 7, 16, 0.8);
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .portfolio::before,
@@ -708,6 +719,12 @@ body::before {
   padding: 1.5rem;
   background: #09142c;
   box-shadow: none;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.normal-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .normal-card h3 {
@@ -868,20 +885,19 @@ body::before {
 .normal-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.normal-nav {
-  display: flex;
-  flex-wrap: wrap;
   gap: 0.75rem;
   font-size: 0.85rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   align-items: center;
+  position: sticky;
+  top: 0.75rem;
+  z-index: 5;
+  padding: 0.65rem;
+  border-radius: 999px;
+  background: rgba(3, 7, 16, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px) saturate(160%);
 }
 
 .normal-nav__link {
@@ -894,6 +910,11 @@ body::before {
   transition: border 0.3s ease, color 0.3s ease, background 0.3s ease;
   font-family: inherit;
   font-size: 0.85rem;
+}
+
+.normal-nav__link:focus-visible {
+  outline: 2px solid rgba(123, 213, 255, 0.6);
+  outline-offset: 2px;
 }
 
 .normal-nav__link.active,
